@@ -1,6 +1,6 @@
 package com.example.blog_app;
 
-import java.util.Optional; 
+import java.util.Optional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +22,13 @@ public class BlogController {
         return "home";
     }
 
+    @GetMapping("/post")
+    public String showForm(Model model) {
+        // もしクラス名が BlogForm なら、新しいインスタンスを作って渡す
+        model.addAttribute("blogForm", new BlogForm()); 
+        return "post";
+    }
+    
     @GetMapping("/about")
     public String about() {
         return "about";
@@ -46,11 +53,6 @@ public class BlogController {
     @PostMapping("/create/save")
     public String saveBlog(@ModelAttribute Blog blog) {
         blogRepository.save(blog);
-        return "create/complet";
-    }
-
-    @GetMapping("/create/complet")
-    public String complet() {
         return "create/complet";
     }
 
