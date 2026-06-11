@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -10,18 +10,18 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">ホーム</a></li>
-                <li><a href="/blog">記事一覧</a></li>
+    <div th:replace="~{/fragment/title :: header}"></div>
+        <header>
+            <nav>
+                <ul>
+                <li><a href="/">記事一覧</a></li>
                 <li><a href="/post">記事を投稿する</a></li>
                 <li><a href="/about">このサイトについて</a></li>
-            </ul>
-        </nav>
-    </header>
-    <h1>このサイトについて</h1>
-
+                </ul>
+            </nav>
+        </header>
+            <h1>このサイトについて</h1>
+    </div>
 </body>
 
 </html>

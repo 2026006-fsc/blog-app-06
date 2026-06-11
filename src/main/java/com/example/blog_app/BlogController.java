@@ -1,40 +1,91 @@
 package com.example.blog_app;
 
+import java.util.Optional; 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BlogController {
-    private final BlogService blogService;
+    private final BlogRepository blogRepository;
 
-    public BlogController(BlogService blogService) {
-        this.blogService = blogService;
+    public BlogController(BlogRepository blogRepository) {
+        this.blogRepository = blogRepository;
     }
 
     @GetMapping("/")
-    public String getHome(@RequestParam(required = false) String keyword, Model model) {
-        model.addAttribute("blogs", blogService.findAll());
-        return "blog";
-    }
-
-    @GetMapping("/post")
-    public String postBlog() {
-        return "post";
+    public String home(Model model) {
+        model.addAttribute("blogs", blogRepository.findAll());
+        return "home";
     }
 
     @GetMapping("/about")
-    public String aboutBlog() {
+    public String about() {
         return "about";
     }
 
-    @PostMapping("/books")
-    public String create(@ModelAttribute BlogForm form) {
-        blogService.register(form);
-        return "redirect:/books";
+    @GetMapping("/blog/{id}")
+    public String detail(@PathVariable("id") int id, Model model) {
+        Optional<Blog> blogOpt = blogRepository.searchById(id);
+        if (blogOpt.isEmpty()) {
+            return "redirect:/";
+        }
+        model.addAttribute("blog", blogOpt.get());
+        return "blog/detail";
+    }
+
+    @GetMapping("/create/createNewBlog")
+    public String createNewBlog(Model model) {
+        model.addAttribute("blog", new Blog(0, "", "", ""));
+        return "create/createNewBlog";
+    }
+
+    @PostMapping("/create/save")
+    public String saveBlog(@ModelAttribute Blog blog) {
+        blogRepository.save(blog);
+        return "create/complet";
+    }
+
+    @GetMapping("/create/complet")
+    public String complet() {
+        return "create/complet";
     }
 
 }
+// public class BlogController {
+// private final BlogService blogService;
+
+// public BlogController(BlogService blogService) {
+// this.blogService = blogService;
+// }
+
+// @GetMapping("/")
+// public String home() {
+// return "home";
+// }
+
+// @GetMapping("blog")
+// public String getBlog() {
+// return "blog";
+// }
+
+// @GetMapping("/post")
+// public String postBlog() {
+// return "post";
+// }
+
+// @GetMapping("/about")
+// public String about() {
+// return "about";
+// }
+
+// @PostMapping("/blog")
+// public String create(@ModelAttribute BlogForm form) {
+// blogService.register(form);
+// return "redirect:/blog";
+// }
+
+// }

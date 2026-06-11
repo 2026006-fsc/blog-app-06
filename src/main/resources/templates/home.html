@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -11,15 +11,30 @@
 <header>
     <nav>
         <ul>
-                <li><a href="/">ホーム</a></li>
-                <li><a href="/blog">記事一覧</a></li>
-                <li><a href="/post">記事を投稿する</a></li>
-                <li><a href="/about">このサイトについて</a></li>
+            <li><a href="/">記事一覧</a></li>
+            <li><a href="/post">記事を投稿する</a></li>
+            <li><a href="/about">このサイトについて</a></li>
         </ul>
     </nav>
 </header>
 
 <h1>ホーム</h1>
+
+<div th:replace="~{/fragment/title :: header}"></div>
+
+<div class="main">
+    <h1>おすすめ</h1>
+
+    <div class="block" th:each="blog : ${blogs}">
+        <a th:href="@{blog/{id}(id=${blog.id})}">
+            <div class="text-content">
+                <h2 class="title" th:text="${blog.title}">記事一覧</h2>
+
+                <p class="author" th:text="${blog.author}">著者</p>
+            </div>
+        </a>
+    </div>
+</div>
 
 <body>
 
