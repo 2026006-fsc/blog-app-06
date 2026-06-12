@@ -5,23 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>このサイトについて</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="/css/style.css">
 
 </head>
 
 <body>
     <div th:replace="~{/fragment/title :: header}"></div>
-        <header>
-            <nav>
-                <ul>
-                <li><a href="/">記事一覧</a></li>
-                <li><a href="/post">記事を投稿する</a></li>
-                <li><a href="/about">このサイトについて</a></li>
-                </ul>
-            </nav>
-        </header>
-            <h1>このサイトについて</h1>
-    </div>
+    <h1>このサイトについて</h1>
 </body>
 
 </html>

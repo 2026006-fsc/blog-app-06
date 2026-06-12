@@ -4,39 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ホーム</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>記事一覧</title>
+    <link rel="stylesheet" href="/css/style.css">
 
 </head>
-<header>
-    <nav>
-        <ul>
-            <li><a href="/">記事一覧</a></li>
-            <li><a href="/post">記事を投稿する</a></li>
-            <li><a href="/about">このサイトについて</a></li>
-        </ul>
-    </nav>
-</header>
-
-<h1>ホーム</h1>
-
-<div th:replace="~{/fragment/title :: header}"></div>
-
-<div class="main">
-    <h1>おすすめ</h1>
-
-    <div class="block" th:each="blog : ${blogs}">
-        <a th:href="@{blog/{id}(id=${blog.id})}">
-            <div class="text-content">
-                <h2 class="title" th:text="${blog.title}">記事一覧</h2>
-
-                <p class="author" th:text="${blog.author}">著者</p>
-            </div>
-        </a>
-    </div>
-</div>
 
 <body>
+    <div th:replace=" ~{fragment/title :: header}"></div>
+
+    <h1>ホーム</h1>
+
+    <div class="main">
+        <h1>おすすめ</h1>
+
+        <div class="block" th:each="blog : ${blogs}">
+            <a th:href="@{/blog/{id}(id=${blog.id})}">
+                <div class="text-content">
+                    <h2 class="title" th:text="${blog.title}">記事一覧</h2>
+
+                    <p class="author" th:text="${blog.author}">作者</p>
+                </div>
+            </a>
+        </div>
+    </div>
 
 </body>
 
