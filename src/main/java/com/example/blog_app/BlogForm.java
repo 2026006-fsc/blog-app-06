@@ -5,8 +5,10 @@ public class BlogForm {
     private String title;
     private String content;
 
-    // 引数なしのコンストラクタ（Spring Bootが自動で使うために必要）
-    public BlogForm() {
+    public BlogForm(String author, String title, String content) {
+        this.author = author;
+        this.title = title;
+        this.content = content;
     }
 
     // ゲッターとセッター
@@ -19,16 +21,18 @@ public class BlogForm {
     }
 
     public String getTitle() {
-        return title; 
+        return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
 
     public String getContent() {
-        return content; 
+        return content;
     }
+
     public void setContent(String content) {
-        this.content = content; 
+        this.content = content;
     }
 }

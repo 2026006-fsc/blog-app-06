@@ -3,6 +3,9 @@ package com.example.blog_app;
 import java.util.List;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import java.util.Optional;
 
 @Repository
@@ -20,20 +23,19 @@ public class BlogRepository {
   }
 
   public Optional searchById(int id) {
-    return jdbcClient.sql("SELECT id, author, title, content, created_at FROM blog WHERE id = :id")
+    return jdbcClient.sql("SELECT id, author, title, content FROM blog WHERE id = :id")
         .param("id", id)
         .query(Blog.class)
         .optional();
   }
 
-  public void save(Blog blog) {
+  public void save(BlogForm blogForm) {
     jdbcClient.sql(
-        "INSERT INTO blog (id, author, title, content) VALUES (:author, :title, :content, NOW()")
-        .param("title", blog.getTitle())
-        .param("author", blog.getTitle())
-        .param("content", blog.getContent())
+        "INSERT INTO blog_app.blog (author, title, content) VALUES (:author, :title, :content)")
+        .param("title", blogForm.getTitle())
+        .param("author", blogForm.getAuthor())
+        .param("content", blogForm.getContent())
         .update();
 
   }
-
 }

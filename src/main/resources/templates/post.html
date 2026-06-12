@@ -10,22 +10,22 @@
 </head>
 
 <body>
-    <div th:replace="~{/fragment/title :: header}"></div>
-    
+    <div th:replace="~{fragment/title :: header}"></div>
+
     <div class="form-container">
         <h1>ブログを投稿する</h1>
 
-        <form th:action="@{/blog}" th:object="${blogForm}" method="post">
+        <form action="/post"  method="post">
 
             <div class="form-group">
                 <label for="title">タイトル</label>
-                <input type="text" id="title" th:field="*{title}" placeholder="記事のタイトルを入力してください" required />
+                <input type="text" id="title" name="title" placeholder="記事のタイトルを入力してください" required />
 
                 <label class="required-label">作者名</label>
-                <input type="text" name="author" placeholder="作者名" class="input-author" required><br>
+                <input type="text" id="author" name="author" placeholder="作者名" class="input-author" required><br>
 
                 <label for="content">本文</label>
-                <textarea id="content" th:field="*{content}" placeholder="ここに本文を入力してください" required></textarea>
+                <textarea id="content" name="content" placeholder="ここに本文を入力してください" required></textarea>
             </div>
 
             <button type="submit" class="submit-btn">投稿する</button>
