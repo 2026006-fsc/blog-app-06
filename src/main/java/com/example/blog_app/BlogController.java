@@ -27,12 +27,6 @@ public class BlogController {
         return "post";
     }
 
-    // @GetMapping("/post")
-    // public String showForm(Model model) {
-    // model.addAttribute(@ModelAttribute("blogForm") BlogForm blogForm);
-    // return "post";
-    // }
-
     @GetMapping("/about")
     public String about() {
         return "about";
@@ -61,45 +55,4 @@ public class BlogController {
         blogService.saveBlog(blogForm);
         return "redirect:/";
     }
-
-    // 投稿を保存したことを表示する処理
-    // @GetMapping("create/complet")
-    // public String complet() {
-    // return "home";
-    // }
-
 }
-// public class BlogController {
-// private final BlogService blogService;
-
-// public BlogController(BlogService blogService) {
-// this.blogService = blogService;
-// }
-
-// @GetMapping("/")
-// public String home() {
-// return "home";
-// }
-
-// @GetMapping("blog")
-// public String getBlog() {
-// return "blog";
-// }
-
-// @GetMapping("/post")
-// public String postBlog() {
-// return "post";
-// }
-
-// @GetMapping("/about")
-// public String about() {
-// return "about";
-// }
-
-// @PostMapping("/blog")
-// public String create(@ModelAttribute BlogForm form) {
-// blogService.register(form);
-// return "redirect:/blog";
-// }
-
-// }
